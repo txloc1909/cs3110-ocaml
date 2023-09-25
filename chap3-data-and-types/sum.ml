@@ -1,3 +1,3 @@
 let rec sum = function
-    | [] -> 1
+    | [] -> 0
     | x :: xs -> x + sum xs
