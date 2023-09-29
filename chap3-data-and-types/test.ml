@@ -2,6 +2,7 @@ open OUnit2
 open Sum
 open Weekday
 open Patterns
+open Library
 
 let make_sum_test name expected_output input =
     name >:: (fun _ -> assert_equal expected_output (sum input) ~printer:string_of_int)
@@ -43,6 +44,15 @@ let patterns_tests = "test suite for patterns" >::: [
     "firsttwo_not_eq" >:: (fun _ -> assert (not (first_two_equal [1; 2; 3])));
 ]
 
+let library_tests = "test suite for library" >::: [
+    make_simple_test "5th_elem_0" fifth_elem [] 0;
+    make_simple_test "5th_elem_1" fifth_elem [1] 0;
+    make_simple_test "5th_elem_2" fifth_elem [1; 2] 0;
+    make_simple_test "5th_elem_5" fifth_elem [1; 2; 3; 4; 5] 5;
+    make_simple_test "5th_elem_more" fifth_elem [1; 2; 3; 4; 5; 6] 5;
+]
+
 let _ = run_test_tt_main sum_tests
 let _ = run_test_tt_main weekday_tests
 let _ = run_test_tt_main patterns_tests
+let _ = run_test_tt_main library_tests
