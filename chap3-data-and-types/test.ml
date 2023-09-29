@@ -1,6 +1,7 @@
 open OUnit2
 open Sum
 open Weekday
+open Patterns
 
 let make_sum_test name expected_output input =
     name >:: (fun _ -> assert_equal expected_output (sum input) ~printer:string_of_int)
@@ -24,5 +25,12 @@ let weekday_tests = "test suite for next_weekday" >::: [
     make_weekday_test "mon_after_sun" Monday Sunday;
 ]
 
+let patterns_tests = "test suite for patterns" >::: [
+    "first_elem_bigred" >:: (fun _ -> assert (first_bigred ["bigred"; "foo";]));
+    "empty_list_bigred" >:: (fun _ -> assert (not (first_bigred [])));
+    "first_elem_not_bigred" >:: (fun _ -> assert (not (first_bigred ["foo"; "bar"; "baz"])));
+]
+
 let _ = run_test_tt_main sum_tests
 let _ = run_test_tt_main weekday_tests
+let _ = run_test_tt_main patterns_tests
