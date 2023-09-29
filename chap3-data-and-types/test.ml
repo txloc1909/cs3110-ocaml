@@ -12,7 +12,13 @@ let sum_tests = "test suite for sum" >::: [
 ]
 
 let weekday_tests = "test suite for next_weekday" >::: [
-    "tue_after_mon" >:: (fun _ -> assert_equal Tuesday (next_weekday Monday))
+    "tue_after_mon" >:: (fun _ -> assert_equal Tuesday (next_weekday Monday));
+    "wed_after_tue" >:: (fun _ -> assert_equal Wednesday (next_weekday Tuesday));
+    "thu_after_wed" >:: (fun _ -> assert_equal Thursday (next_weekday Wednesday));
+    "fri_after_thu" >:: (fun _ -> assert_equal Friday (next_weekday Thursday));
+    "sat_after_fri" >:: (fun _ -> assert_equal Saturday (next_weekday Friday));
+    "sun_after_sat" >:: (fun _ -> assert_equal Sunday (next_weekday Saturday));
+    "mon_after_sun" >:: (fun _ -> assert_equal Monday (next_weekday Sunday));
 ]
 
 let _ = run_test_tt_main sum_tests
