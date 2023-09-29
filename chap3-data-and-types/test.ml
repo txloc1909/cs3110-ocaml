@@ -29,6 +29,13 @@ let patterns_tests = "test suite for patterns" >::: [
     "first_elem_bigred" >:: (fun _ -> assert (first_bigred ["bigred"; "foo";]));
     "empty_list_bigred" >:: (fun _ -> assert (not (first_bigred [])));
     "first_elem_not_bigred" >:: (fun _ -> assert (not (first_bigred ["foo"; "bar"; "baz"])));
+
+    "len0" >:: (fun _ -> assert (not (len_2or4 [])));
+    "len1" >:: (fun _ -> assert (not (len_2or4 ["foo"])));
+    "len2" >:: (fun _ -> assert (len_2or4 [1.0; 2.0]));
+    "len3" >:: (fun _ -> assert (not (len_2or4 [true; true; false])));
+    "len4" >:: (fun _ -> assert (len_2or4 [1; 2; 3; 4]));
+    "len5" >:: (fun _ -> assert (not (len_2or4 [1; 2; 3; 4; 5])));
 ]
 
 let _ = run_test_tt_main sum_tests
