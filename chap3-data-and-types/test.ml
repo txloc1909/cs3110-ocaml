@@ -50,6 +50,12 @@ let library_tests = "test suite for library" >::: [
     make_simple_test "5th_elem_2" fifth_elem [1; 2] 0;
     make_simple_test "5th_elem_5" fifth_elem [1; 2; 3; 4; 5] 5;
     make_simple_test "5th_elem_more" fifth_elem [1; 2; 3; 4; 5; 6] 5;
+
+    make_simple_test "desc_sort_empty" desc_sort [] [];
+    make_simple_test "desc_sort_one" desc_sort [1] [1];
+    make_simple_test "desc_sort_two" desc_sort [1; 2] [2; 1];
+    make_simple_test "desc_sort_three" desc_sort [1; 2; 3] [3; 2; 1];
+    make_simple_test "desc_sort_six" desc_sort [5; 2; 6; 2; 4; 3] [6; 5; 4; 3; 2; 2];
 ]
 
 let _ = run_test_tt_main sum_tests
