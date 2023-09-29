@@ -36,6 +36,11 @@ let patterns_tests = "test suite for patterns" >::: [
     "len3" >:: (fun _ -> assert (not (len_2or4 [true; true; false])));
     "len4" >:: (fun _ -> assert (len_2or4 [1; 2; 3; 4]));
     "len5" >:: (fun _ -> assert (not (len_2or4 [1; 2; 3; 4; 5])));
+
+    "firsttwo_empty" >:: (fun _ -> assert (not (first_two_equal [])));
+    "firsttwo_one" >:: (fun _ -> assert (not (first_two_equal ["foo"])));
+    "firsttwo_equal" >:: (fun _ -> assert (first_two_equal [1.0; 1.0]));
+    "firsttwo_not_eq" >:: (fun _ -> assert (not (first_two_equal [1; 2; 3])));
 ]
 
 let _ = run_test_tt_main sum_tests
