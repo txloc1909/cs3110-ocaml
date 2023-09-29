@@ -6,8 +6,8 @@ open Patterns
 let make_sum_test name expected_output input =
     name >:: (fun _ -> assert_equal expected_output (sum input) ~printer:string_of_int)
 
-let make_weekday_test name expected_output input =
-    name >:: (fun _ -> assert_equal expected_output (next_weekday input))
+let make_simple_test name func input expected_output =
+    name >:: (fun _ -> assert_equal expected_output (func input))
 
 let sum_tests = "test suite for sum" >::: [
     make_sum_test "empty"        0 [];
@@ -16,13 +16,13 @@ let sum_tests = "test suite for sum" >::: [
 ]
 
 let weekday_tests = "test suite for next_weekday" >::: [
-    make_weekday_test "tue_after_mon" Tuesday Monday;
-    make_weekday_test "wed_after_tue" Wednesday Tuesday;
-    make_weekday_test "thu_after_wed" Thursday Wednesday;
-    make_weekday_test "fri_after_thu" Friday Thursday;
-    make_weekday_test "sat_after_fri" Saturday Friday;
-    make_weekday_test "sun_after_sat" Sunday Saturday;
-    make_weekday_test "mon_after_sun" Monday Sunday;
+    make_simple_test "tue_after_mon" next_weekday Monday Tuesday;
+    make_simple_test "wed_after_tue" next_weekday Tuesday Wednesday;
+    make_simple_test "thu_after_wed" next_weekday Wednesday Thursday;
+    make_simple_test "fri_after_thu" next_weekday Thursday Friday;
+    make_simple_test "sat_after_fri" next_weekday Friday Saturday;
+    make_simple_test "sun_after_sat" next_weekday Saturday Sunday;
+    make_simple_test "mon_after_sun" next_weekday Sunday Monday;
 ]
 
 let patterns_tests = "test suite for patterns" >::: [
