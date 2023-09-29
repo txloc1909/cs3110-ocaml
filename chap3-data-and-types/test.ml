@@ -56,6 +56,16 @@ let library_tests = "test suite for library" >::: [
     make_simple_test "desc_sort_two" desc_sort [1; 2] [2; 1];
     make_simple_test "desc_sort_three" desc_sort [1; 2; 3] [3; 2; 1];
     make_simple_test "desc_sort_six" desc_sort [5; 2; 6; 2; 4; 3] [6; 5; 4; 3; 2; 2];
+
+    (* For `last_elem`, assume input list is non-empty*)
+    make_simple_test "last_elem_one" last_elem [1.0] 1.0;
+    make_simple_test "last_elem_two" last_elem ["foo"; "bar"] "bar";
+    make_simple_test "last_elem_three" last_elem [1; 2; 3] 3;
+
+    make_simple_test "any_zeroes_empty" any_zeroes [] false;
+    make_simple_test "any_zeroes_once" any_zeroes [1; 0; 2] true;
+    make_simple_test "any_zeroes_twice" any_zeroes [0; 1; 0] true;
+    make_simple_test "any_zeroes_none" any_zeroes [1; 2; 3] false;
 ]
 
 let _ = run_test_tt_main sum_tests
