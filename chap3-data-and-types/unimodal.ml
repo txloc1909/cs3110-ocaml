@@ -23,13 +23,3 @@ let is_unimodal (lst:int list) =
     | _ :: [] -> true
     | x1 :: x2 :: xs -> if x1 <= x2 then unimodal x2 xs true
                         else unimodal x2 xs false
-
-
-let _ = assert (is_unimodal [])
-let _ = assert (is_unimodal [1])
-let _ = assert (is_unimodal [1; 1; 1])
-let _ = assert (is_unimodal [1; 2; 3; 2; 1])
-let _ = assert (is_unimodal [1; 2; 3; 4])
-let _ = assert (is_unimodal [4; 3; 2; 1])
-let _ = assert (is_unimodal [1; 2; 2; 3; 4; 4; 2; 1])
-let _ = assert (not (is_unimodal [1; 2; 3; 2; 4; 5; 1]))

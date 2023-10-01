@@ -3,6 +3,7 @@ open Sum
 open Weekday
 open Patterns
 open Library
+open Unimodal
 
 let make_sum_test name expected_output input =
     name >:: (fun _ -> assert_equal expected_output (sum input) ~printer:string_of_int)
@@ -68,7 +69,21 @@ let library_tests = "test suite for library" >::: [
     make_simple_test "any_zeroes_none" any_zeroes [1; 2; 3] false;
 ]
 
+
+let unimodal_tests = "test suite for is_unimodal" >::: [
+    "empty_list"        >:: (fun _ -> assert (is_unimodal []));
+    "singleton"         >:: (fun _ -> assert (is_unimodal [1]));
+    "constant"          >:: (fun _ -> assert (is_unimodal [1; 1; 1]));
+    "one_mode"          >:: (fun _ -> assert (is_unimodal [1; 2; 3; 2; 1]));
+    "only_increase"     >:: (fun _ -> assert (is_unimodal [1; 2; 3; 4]));
+    "only_decrease"     >:: (fun _ -> assert (is_unimodal [4; 3; 2; 1]));
+    "multple_flat_top"  >:: (fun _ -> assert (is_unimodal [1; 2; 2; 3; 4; 4; 2; 1]));
+    "multimodal"        >:: (fun _ -> assert (not (is_unimodal [1; 2; 3; 2; 4; 5; 1])));
+]
+
+
 let _ = run_test_tt_main sum_tests
 let _ = run_test_tt_main weekday_tests
 let _ = run_test_tt_main patterns_tests
 let _ = run_test_tt_main library_tests
+let _ = run_test_tt_main unimodal_tests
